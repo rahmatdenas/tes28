@@ -456,7 +456,7 @@ function updateFeatureCounts(totalValidRecords) {
   let btnImg = document.getElementById('btn-image') || document.querySelector('[data-filter="image"]');
   let btnArt = document.getElementById('btn-article') || document.querySelector('[data-filter="article"]');
 
-  if (btnAll) btnAll.textContent = 'Semua';
+  if (btnAll) btnAll.textContent = 'Semua Hasil';
   if (btnImg) btnImg.textContent = 'Memiliki Gambar';
   if (btnArt) btnArt.textContent = 'Memiliki Artikel';
 
