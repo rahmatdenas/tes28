@@ -641,13 +641,37 @@ function activateSite(qid) {
 }
 
 function generateRecordDetails(qid) {
-// 1. Buat tautan sunting
-let wikiUrlUtama = `https://www.wikidata.org/wiki/${qid}`;
-let tautanSuntingRingkasan = `<a href="${wikiUrlUtama}" target="_blank" class="sunting-link" title="Sunting data di Wikidata" aria-label="Sunting data di Wikidata"></a>`;
+  // --- BAGIAN INI JANGAN DIHAPUS ---
+  let record = Records[qid];
+  let titleHtml = `<h1>${record.title}</h1>`;
 
-// 2. Tutup tag <h2> terlebih dahulu, lalu letakkan tautan di luarnya
-let designationsHtml = `<h2>Ringkasan</h2>${tautanSuntingRingkasan}`;
-designationsHtml += '<ul class="designations">';
+  let figureHtml = generateFigure(record.imageFilename);
+
+  if (record.imageFilename) {
+    figureHtml = figureHtml.replace('<figure class="', '<figure class="gambar-utama ');
+  }
+
+  let articleHtml;
+  if (record.articleTitle) {
+    articleHtml = '<div class="article main-text loading"><div class="loader"></div></div>';
+  } else {
+    articleHtml = '<div class="article main-text nodata"><p>Situs ini belum memiliki artikel Wikipedia berbahasa Indonesia.</p></div>';
+  }
+  // ---------------------------------
+
+  // --- BARU MASUK KE KODE RINGKASAN YANG BARU ---
+  let wikiUrlUtama = `https://www.wikidata.org/wiki/${qid}`;
+  let tautanSuntingRingkasan = `<a href="${wikiUrlUtama}" target="_blank" class="sunting-link" title="Sunting data di Wikidata" aria-label="Sunting data di Wikidata"></a>`;
+
+  let designationsHtml = `
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <h2 style="margin: 0;">Ringkasan</h2>
+      ${tautanSuntingRingkasan}
+    </div>
+  `;
+  designationsHtml += '<ul class="designations">';
+
+  // ... (dan seterusnya ke bawah sesuai kode terakhir yang kita bahas) ...
 
 let isFirstDesignation = true; // Mencegah duplikasi container peristiwa
 
