@@ -266,7 +266,7 @@ function renderDynamicDataInPanel(qid) {
   let container = record.panelElem.querySelector(`#events-container-${qid}`);
   if (!container) return; 
 
-  let html = '';
+let html = '';
   let wikiBaseUrl = `https://www.wikidata.org/wiki/${qid}`;
 
   // --- URUTAN 1: PERISTIWA PENTING ---
@@ -277,7 +277,7 @@ function renderDynamicDataInPanel(qid) {
       'pembangunan kembali': 5
     };
 
-record.events.sort((a, b) => {
+    record.events.sort((a, b) => {
       // 1. Prioritaskan pengurutan berdasarkan TAHUN (Kronologis)
       if (a.sortYear !== b.sortYear) {
         return a.sortYear - b.sortYear;
@@ -290,27 +290,29 @@ record.events.sort((a, b) => {
       return orderA - orderB;
     });
 
-let tautanSuntingEvent = `<a href="${wikiBaseUrl}#P793" target="_blank" class="sunting-link" title="Sunting peristiwa di Wikidata"></a>`;
-
     record.events.forEach(ev => {
       let capLabel = ev.label.charAt(0).toUpperCase() + ev.label.slice(1);
       let timeText = ev.time ? ev.time : ''; 
-      html += `<p>${capLabel}: ${timeText}${tautanSuntingEvent}</p>`;
+      
+      // Ikon sunting telah dihapus, hanya menyisakan teks murni
+      html += `<p>${capLabel}: ${timeText}</p>`;
     });
   }
 
   // --- URUTAN 2: STATUS (KONDISI - P5817) ---
   if (record.kondisi) {
     let kondisiKecil = record.kondisi.toLowerCase();
-    let tautanSuntingKondisi = `<a href="${wikiBaseUrl}#P5817" target="_blank" class="sunting-link" title="Sunting kondisi di Wikidata"></a>`;
-    html += `<p>Kondisi: ${kondisiKecil}${tautanSuntingKondisi}</p>`;
+    
+    // Ikon sunting telah dihapus
+    html += `<p>Kondisi: ${kondisiKecil}</p>`;
   }
 
   // --- URUTAN 3: KAPASITAS JEMAAH (P1083) ---
   if (record.kapasitas) {
     let formatAngka = parseInt(record.kapasitas).toLocaleString('id-ID');
-    let tautanSuntingKapasitas = `<a href="${wikiBaseUrl}#P1083" target="_blank" class="sunting-link" title="Sunting kapasitas di Wikidata"></a>`;
-    html += `<p>Kapasitas: ${formatAngka} jemaah${tautanSuntingKapasitas}</p>`;
+    
+    // Ikon sunting telah dihapus
+    html += `<p>Kapasitas: ${formatAngka} jemaah</p>`;
   }
 
   // --- URUTAN 4: TAUTAN TAMBAHKAN DATA LAINNYA (Tampil Default) ---
