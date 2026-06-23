@@ -10,13 +10,16 @@ const OSM_LAYER_ATTRIBUTION   = 'Base map &copy; <a href="https://www.openstreet
 const CARTO_LAYER_URL         = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png';
 const CARTO_LAYER_ATTRIBUTION = 'Base map &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> (data), <a href="https://carto.com/">CARTO</a> (style)';
 const TILE_LAYER_MAX_ZOOM     = 16;
-const MIN_PH_LAT              =   0.3;
-const MAX_PH_LAT              =  -2;
-const MIN_PH_LON              = 98;
-const MAX_PH_LON              = 102;
+
+// KOORDINAT DIUBAH KE SKALA NASIONAL (INDONESIA)
+const MIN_PH_LAT              =   6.0;   // Ujung Utara (Weh)
+const MAX_PH_LAT              = -11.0;   // Ujung Selatan (Rote)
+const MIN_PH_LON              =  95.0;   // Ujung Barat (Sabang)
+const MAX_PH_LON              = 141.0;   // Ujung Timur (Merauke)
 
 // Globals
 var Records = {};        // Main app database, keyed by QID
+var ProvinceIndex = {};  // PENAMBAHAN: Objek penampung kategori provinsi dinamis
 var SparqlValuesClause;  // SPARQL "VALUES" clause containing the QIDs of all main Wikidata items
 var Map;                 // Leaflet map object
 var Cluster;             // Leaflet map cluster
